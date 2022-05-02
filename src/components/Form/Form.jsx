@@ -1,7 +1,16 @@
 import {useForm} from 'react-hook-form' 
 import { useEffect } from 'react'
 import Quagga from 'quagga'
+
+
 export default function Form() {
+
+    const onDetected = result => {
+        Quagga.offDetected(onDetected)
+
+        let code = result.codeResult.code
+        alert(code)
+    }
 
     useEffect(() => {
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
@@ -14,10 +23,17 @@ export default function Form() {
                         facingMode: "environment",
                     },
                 },
+                area: { // defines rectangle of the detection/localization area
+                    top: "0%",    // top offset
+                    right: "0%",  // right offset
+                    left: "0%",   // left offset
+                    bottom: "0%"  // bottom offset
+                },
                 numOfWorkers: 1,
                 locate: true,
                 decoder: {
-                    readers: ['ean_reader']
+                   // readers: ['ean_reader']
+                   readers: ["code_128_reader"] 
                 }
             },
             err => {
@@ -27,8 +43,9 @@ export default function Form() {
                     return
                 }
                 Quagga.start()
-            }
+            },
             
+            Quagga.onDetected(onDetected)
             );
         }
     },[]);
@@ -39,11 +56,11 @@ export default function Form() {
     }
     console.log(errors)
     return (
-        <form onSubmit={handleSubmit(userDate)}>
+        <form id="etiqueta" onSubmit={handleSubmit(userDate)}>
             <div>
                 <label htmlFor="">
                     Etiqueta
-                    <input type="text" id="etiqueta" {...register('etiqueta', { required: true })}  />
+                    <input type="text"  {...register('etiqueta', { required: true })}  />
                     {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
                 </label>
                 <button>Consultar</button>
