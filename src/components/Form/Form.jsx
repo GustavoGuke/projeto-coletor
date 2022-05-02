@@ -25,7 +25,7 @@ export default function Form() {
                 numOfWorkers: 1,
                 locate: true,
                 decoder: {
-                    readers: ['ean_reader']
+                    readers: ['code_128_reader']
                 }
             },
             err => {
