@@ -3,6 +3,14 @@ import { useEffect } from 'react'
 import Quagga from 'quagga'
 export default function Form() {
 
+
+    const onDetected = result => {
+        Quagga.offDetected(onDetected)
+
+        let code = result.codeResult.code
+        alert(code)
+    }
+
     useEffect(() => {
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
             Quagga.init({
@@ -27,8 +35,9 @@ export default function Form() {
                     return
                 }
                 Quagga.start()
-            }
+            },
             
+            Quagga.onDetected(onDetected)
             );
         }
     },[]);
@@ -39,11 +48,11 @@ export default function Form() {
     }
     console.log(errors)
     return (
-        <form onSubmit={handleSubmit(userDate)}>
+        <form id="etiqueta" onSubmit={handleSubmit(userDate)}>
             <div>
                 <label htmlFor="">
                     Etiqueta
-                    <input type="text" id="etiqueta" {...register('etiqueta', { required: true })}  />
+                    <input type="text"  {...register('etiqueta', { required: true })}  />
                     {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
                 </label>
                 <button>Consultar</button>
