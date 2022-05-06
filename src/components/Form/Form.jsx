@@ -14,6 +14,14 @@ export default function FormComponet() {
         alert(code)
     }
 
+
+    const onDetected = result => {
+        Quagga.offDetected(onDetected)
+
+        let code = result.codeResult.code
+        alert(code)
+    }
+
     useEffect(() => {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             Quagga.init({
@@ -34,6 +42,7 @@ export default function FormComponet() {
                 numOfWorkers: 1,
                 locate: true,
                 decoder: {
+<<<<<<< HEAD
                     // readers: ['ean_reader']
                     readers: ["code_128_reader"]
                 }
@@ -48,6 +57,21 @@ export default function FormComponet() {
                 },
 
                 // Quagga.onDetected(onDetected)
+=======
+                    readers: ['code_128_reader']
+                }
+            },
+            err => {
+                if(err) {
+                    console.log(err)
+                    alert("erro ao abri a camera do dispositivo")
+                    return
+                }
+                Quagga.start()
+            },
+            
+            Quagga.onDetected(onDetected)
+>>>>>>> 3db529f17729173c16c592df53909c8313e018a3
             );
         }
     }, []);
@@ -58,9 +82,21 @@ export default function FormComponet() {
     }
     console.log(errors)
     return (
+<<<<<<< HEAD
         <Form id="etiqueta" onSubmit={handleSubmit(userDate)}>
             <div className='label-header'>
                 <Label>Etiqueta:</Label>
+=======
+        <form id="etiqueta" onSubmit={handleSubmit(userDate)}>
+            <div>
+                <label htmlFor="">
+                    Etiqueta
+                    <input type="text"  {...register('etiqueta', { required: true })}  />
+                    {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
+                </label>
+                <button>Consultar</button>
+                <button>Limpar</button>
+>>>>>>> 3db529f17729173c16c592df53909c8313e018a3
                 <button>Sair</button>
             </div>
 
