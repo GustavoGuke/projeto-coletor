@@ -1,12 +1,14 @@
-import Form from "./components/Form/Form"
+import FormComponet from "./components/Form/Form"
+import { GlobalStyle } from "./GlobalStyle"
 
 function App() {
   
 
   return (
-    <div>
-      <Form/>
-    </div>
+    <>
+    <GlobalStyle />
+      <FormComponet/>
+    </>
   )
 }
 
