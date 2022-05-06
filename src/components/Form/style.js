@@ -37,6 +37,8 @@ export const Input = styled.input`
 `
 export const InputStatus= styled(Input)`
     color: #F5F1EF;
+    height: 45px;
+    font-size: 1.5em;
 `
 export const InputDescricao = styled.textarea`
     color: #F5F1EF;
@@ -49,7 +51,7 @@ export const InputDescricao = styled.textarea`
 `
 export const InputLocal = styled.textarea`
     color: 'black';
-    height: 50px;
+    height: 40px;
     padding-left: 15px;
     font-weight: bold;
     padding-top: 10px;
@@ -66,7 +68,7 @@ export const Button = styled.button`
     color: #F5F1EF;
     height: 53px;
     width: 61px;
-    font-size: 2.4em;
+    font-size: 1.8em;
     border: none;
     border-radius: 10px;
     box-shadow: #333 3px 3px;
@@ -77,6 +79,12 @@ export const Button = styled.button`
     &:hover {
         background-color: #000057;
     }
+`
+
+export const ButtonSair = styled(Button)`
+    margin-bottom: 5px;
+    height: 30px;
+    font-size: 1em;
 `
 
 export const ButtonSubmit = styled.button`

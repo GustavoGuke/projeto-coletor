@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import Quagga from 'quagga'
 import { FaSistrix, FaTrashAlt } from 'react-icons/fa'
-import { Label, Form, Input, Button, InputDescricao, InputStatus, InputLocal, ButtonSubmit } from './style'
+import { Label, Form, Input, Button, InputDescricao, InputStatus, InputLocal, ButtonSubmit, ButtonSair } from './style'
 
 
 export default function FormComponet() {
@@ -62,7 +62,7 @@ export default function FormComponet() {
             <div className='label-header'>
                 <Label>Etiqueta:</Label>
 
-                <button>Sair</button>
+                <ButtonSair>Sair</ButtonSair>
             </div>
 
             <Input type="text" value="1257" {...register('etiqueta', { required: true })} />
