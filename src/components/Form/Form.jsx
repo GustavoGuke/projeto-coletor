@@ -3,14 +3,17 @@ import { useEffect } from 'react'
 import Quagga from 'quagga'
 import { FaSistrix, FaTrashAlt } from 'react-icons/fa'
 import { Video, Label, Form, Input, Button, InputDescricao, InputStatus, InputLocal, ButtonSubmit, ButtonSair } from './style'
+import { useState } from 'react'
 
 
 export default function FormComponet() {
 
+    const [valueCode, setValueCode] = useState('')
     const onDetected = result => {
         Quagga.offDetected(onDetected)
 
         let code = result.codeResult.code
+        setValueCode((value)=> value = code)
         alert(code)
     }
 
@@ -61,7 +64,7 @@ export default function FormComponet() {
                     <ButtonSair>Sair</ButtonSair>
                 </div>
 
-                <Input type="text" value="1257" {...register('etiqueta', { required: true })} />
+                <Input type="text" value={valueCode} {...register('etiqueta', { required: true })} />
                 {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
 
                 <div className='label-header'>
