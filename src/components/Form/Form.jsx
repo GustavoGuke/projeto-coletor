@@ -53,6 +53,10 @@ export default function FormComponet() {
     function userDate(data) {
         console.log(data)
     }
+
+    function handleApagarCode(){
+        setValueCode('')
+    }
     console.log(errors)
     return (
         <>
@@ -68,7 +72,7 @@ export default function FormComponet() {
                 {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
 
                 <div className='label-header'>
-                    <Button><FaTrashAlt /></Button>
+                    <Button onClick={handleApagarCode}><FaTrashAlt /></Button>
                     <Button><FaSistrix /> </Button>
                 </div>
 
