@@ -13,7 +13,7 @@ export default function FormComponet() {
         Quagga.offDetected(onDetected)
 
         let code = result.codeResult.code
-        setValueCode(valueCode = code)
+        setValueCode(code)
         alert(code)
     }
 
