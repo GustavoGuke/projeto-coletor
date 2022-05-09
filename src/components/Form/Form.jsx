@@ -35,13 +35,13 @@ export default function FormComponet() {
                 err => {
                     if (err) {
                         console.log(err)
-                        // alert("erro ao abri a camera do dispositivo")
+                         alert("erro ao abri a camera do dispositivo")
                         return
                     }
                     Quagga.start()
                 },
 
-                // Quagga.onDetected(onDetected)
+                 Quagga.onDetected(onDetected)
             );
         }
     }, []);
