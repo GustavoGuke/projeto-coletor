@@ -2,12 +2,14 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Quagga from 'quagga'
-import { FaSistrix, FaTrashAlt } from 'react-icons/fa'
+import {MdPhotoCamera} from 'react-icons/md'
+import { FaSistrix, FaTrashAlt, FaPhotoVideo } from 'react-icons/fa'
 import { Video, Label, Form, Input, Button, InputDescricao, InputStatus, InputLocal, ButtonSubmit, ButtonSair } from './style'
 
 let isCamera = false
 export default function FormComponet() {
     const [valueCode, setValueCode] = useState('')
+    const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm()
 
 
     const onDetected = result => {
@@ -15,6 +17,7 @@ export default function FormComponet() {
 
         let code = result.codeResult.code
         setValueCode(code)
+        isCamera = false
         alert(code)
     }
     function handleShowCamera(e) {
@@ -49,46 +52,15 @@ export default function FormComponet() {
             );
         }
     }
-    // useEffect(() => {
-    //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    //         Quagga.init({
-    //             inputStream: {
-    //                 name: "Live",
-    //                 type: "LiveStream",
-    //                 target: document.querySelector("#etiqueta"),
-    //                 constraints: {
-    //                     facingMode: "environment",
-    //                 },
-    //             },
-    //             numOfWorkers: 1,
-    //             locate: true,
-    //             decoder: {
-    //                 readers: ["code_128_reader", "ean_reader"]
-    //             }
-    //         },
-    //             err => {
-    //                 if (err) {
-    //                     console.log(err)
-    //                      alert("erro ao abri a camera do dispositivo")
-    //                     return
-    //                 }
-    //                 Quagga.start()
-    //             },
-
-    //              Quagga.onDetected(onDetected)
-    //         );
-    //     }
-    // }, []);
-    const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm()
-
     function userDate(data) {
         console.log(data)
     }
 
     function handleApagarCode(e) {
         e.preventDefault()
-        isCamera = false
         reset()
+        isCamera = false
+        setValueCode('')
 
     }
 
@@ -118,7 +90,7 @@ export default function FormComponet() {
 
                 <div className='label-header'>
                     <Button onClick={handleApagarCode}><FaTrashAlt /></Button>
-                    <Button onClick={handleShowCamera}>C</Button>
+                    <Button onClick={handleShowCamera}><MdPhotoCamera/></Button>
                     <Button><FaSistrix /> </Button>
                 </div>
 
@@ -133,7 +105,7 @@ export default function FormComponet() {
 
                 <div className='input'>
                     <Label>Localização:</Label>
-                    <InputLocal value="TI" type='text' {...register('Localização')} rows="3" />
+                    <InputLocal type='text' {...register('Localização')} rows="3" />
                     <ButtonSubmit type='submit'>Conferido</ButtonSubmit>
                 </div>
             </Form>
