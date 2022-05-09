@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+
+export const Video = styled.div`
+    video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 100%;
+        min-width: 100%;
+        
+    }
+`
+
+
 export const Label = styled.label`
     font-size: 1.5em;
     color: #F5F1EF;
@@ -35,7 +50,7 @@ export const Input = styled.input`
     border-radius: 10px;
     margin-bottom: 10px;
 `
-export const InputStatus= styled(Input)`
+export const InputStatus = styled(Input)`
     color: #F5F1EF;
     height: 45px;
     font-size: 1.5em;
