@@ -49,6 +49,7 @@ export const Input = styled.input`
     border: 0;
     border-radius: 10px;
     margin-bottom: 10px;
+    
 `
 export const InputStatus = styled(Input)`
     color: #F5F1EF;

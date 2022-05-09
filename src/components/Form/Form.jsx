@@ -1,14 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
+import { useState } from 'react'
 import Quagga from 'quagga'
 import { FaSistrix, FaTrashAlt } from 'react-icons/fa'
 import { Video, Label, Form, Input, Button, InputDescricao, InputStatus, InputLocal, ButtonSubmit, ButtonSair } from './style'
-import { useState } from 'react'
 
-
+let isCamera = false
 export default function FormComponet() {
-
     const [valueCode, setValueCode] = useState('')
+
+
     const onDetected = result => {
         Quagga.offDetected(onDetected)
 
@@ -16,8 +17,9 @@ export default function FormComponet() {
         setValueCode(code)
         alert(code)
     }
-
-    useEffect(() => {
+    function handleShowCamera(e) {
+        e.preventDefault()
+        isCamera = true
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             Quagga.init({
                 inputStream: {
@@ -31,36 +33,67 @@ export default function FormComponet() {
                 numOfWorkers: 1,
                 locate: true,
                 decoder: {
-                    // readers: ['ean_reader']
                     readers: ["code_128_reader", "ean_reader"]
                 }
             },
                 err => {
                     if (err) {
                         console.log(err)
-                         alert("erro ao abri a camera do dispositivo")
+                        alert("erro ao abri a camera do dispositivo")
                         return
                     }
                     Quagga.start()
                 },
 
-                 Quagga.onDetected(onDetected)
+                Quagga.onDetected(onDetected)
             );
         }
-    }, []);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+    }
+    // useEffect(() => {
+    //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //         Quagga.init({
+    //             inputStream: {
+    //                 name: "Live",
+    //                 type: "LiveStream",
+    //                 target: document.querySelector("#etiqueta"),
+    //                 constraints: {
+    //                     facingMode: "environment",
+    //                 },
+    //             },
+    //             numOfWorkers: 1,
+    //             locate: true,
+    //             decoder: {
+    //                 readers: ["code_128_reader", "ean_reader"]
+    //             }
+    //         },
+    //             err => {
+    //                 if (err) {
+    //                     console.log(err)
+    //                      alert("erro ao abri a camera do dispositivo")
+    //                     return
+    //                 }
+    //                 Quagga.start()
+    //             },
+
+    //              Quagga.onDetected(onDetected)
+    //         );
+    //     }
+    // }, []);
+    const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm()
 
     function userDate(data) {
         console.log(data)
     }
 
-    function handleApagarCode(){
-        setValueCode('')
+    function handleApagarCode(e) {
+        e.preventDefault()
+        isCamera = false
+        reset()
+
     }
-    console.log(errors)
+
     return (
         <>
-        
             <Form id="etiqueta" onSubmit={handleSubmit(userDate)}>
                 <div className='label-header'>
                     <Label>Etiqueta:</Label>
@@ -68,11 +101,24 @@ export default function FormComponet() {
                     <ButtonSair>Sair</ButtonSair>
                 </div>
 
-                <Input type="text" value={valueCode} {...register('etiqueta', { required: true })} />
+                {isCamera
+
+                    ? <Input
+                        autoFocus
+                        type="text"
+                        value={valueCode}
+                        {...register('etiqueta', { required: true })} />
+
+                    : <Input
+                        autoFocus
+                        type="text"
+                        {...register('etiqueta', { required: true })} />
+                }
                 {errors.etiqueta && <span>Input etiqueta é obrigatorio</span>}
 
                 <div className='label-header'>
                     <Button onClick={handleApagarCode}><FaTrashAlt /></Button>
+                    <Button onClick={handleShowCamera}>C</Button>
                     <Button><FaSistrix /> </Button>
                 </div>
 
