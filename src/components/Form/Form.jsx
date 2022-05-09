@@ -56,8 +56,8 @@ export default function FormComponet() {
     console.log(errors)
     return (
         <>
-        <Video id="etiqueta"/>
-            <Form  onSubmit={handleSubmit(userDate)}>
+        
+            <Form id="etiqueta" onSubmit={handleSubmit(userDate)}>
                 <div className='label-header'>
                     <Label>Etiqueta:</Label>
 
