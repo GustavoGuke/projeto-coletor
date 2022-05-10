@@ -17,7 +17,6 @@ export default function FormComponet() {
 
         let code = result.codeResult.code
         setValueCode(code)
-        isCamera = false
         alert(code)
     }
     function handleShowCamera(e) {
@@ -59,8 +58,8 @@ export default function FormComponet() {
     function handleApagarCode(e) {
         e.preventDefault()
         reset()
-        isCamera = false
         setValueCode('')
+        isCamera = false
 
     }
 
