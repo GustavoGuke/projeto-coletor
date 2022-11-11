@@ -41,13 +41,6 @@ export const Form = styled.form`
         flex-direction: column;
     }
 `
-export const DivSearch = styled.div`
-    font-size: 2em;
-    display: none;
-    color: #ff454a;
-    font-weight: bold;
-    
-`
 
 export const Input = styled.input`
     height: 56px;
